@@ -31,9 +31,14 @@ function reuseExistingTab (browserSync, urlToOpen) {
   var browserSyncInstance = browserSync.instance
 
   return function () {
-    var url = browserSyncInstance.options
-      .get('urls')
-      .get(urlToOpen)
+    urlToOpen = urlToOpen.toLowerCase();
+    
+    if(urlToOpen.indexOf('http') >= 0 && urlToOpen.indexOf('https') >= 0)
+      var url = urlToOpen;
+    else
+      var url = browserSyncInstance.options
+        .get('urls')
+        .get(urlToOpen)
 
     var command = path.resolve(__dirname, 'scripts/chrome') + ' ' + url
 
