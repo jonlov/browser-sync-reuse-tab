@@ -32,11 +32,10 @@ function reuseExistingTab (browserSync, urlToOpen) {
 
   return function () {
     urlToOpen = urlToOpen.toLowerCase();
-    
-    if(urlToOpen.indexOf('http') >= 0 && urlToOpen.indexOf('https') >= 0)
-      var url = urlToOpen;
-    else
-      var url = browserSyncInstance.options
+
+    var url = urlToOpen;
+    if(!(~urlToOpen.indexOf('http')) && !(~urlToOpen.indexOf('https')))
+      url = browserSyncInstance.options
         .get('urls')
         .get(urlToOpen)
 
